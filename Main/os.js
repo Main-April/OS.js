@@ -1,11 +1,12 @@
-export const OS = {
+const OS = {
     Name: "OS", // Can be changed by another name
     Files: {C: {Users: {ProgramFile:{}, Desktop : {},Documents : {},Downloads : {}}}},
     current_dir: "C/Users",
-    Process : {},
+    Process : {Stack:[], Memory : {},},
+    
 };
 
-export class File {
+class File {
     constructor(name,content,path=""){
         this.name = name;
         this.content = content;
@@ -33,7 +34,7 @@ export class File {
     remove(){OS.ls()[this.name] = undefined;}
 }
 
-export class Path {
+class Path {
     constructor(path){
         this.absolute  = path;
     }
@@ -42,13 +43,26 @@ export class Path {
     get toString() {return this.absolute;}
 }
 
-export class Process {
-    constructor(name,f){
+class Process {
+    constructor(name,f,alloc=f.toString().length){
         this.name = name;
         this.f = f;
+        this.alloc = alloc;
+    }
+    call(...args){
+        OS.Process.Stack.push(this.f);
+        OS.Process.Run(args);
+    }
+    get stop(){
+        OS.Process.Stack.indexOf
     }
 }
-
-
+OS.Process.Run = function (...args) {
+    let f;
+    while(OS.Process.Stack.length>0){
+        f = OS.Process.Stack.shift();
+        f(...args);
+    }
+}
 
 
