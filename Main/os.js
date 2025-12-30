@@ -1,7 +1,8 @@
 export const OS = {
     Name: "OS", // Can be changed by another name
     Files: {C: {Users: {ProgramFile:{}, Desktop : {},Documents : {},Downloads : {}}}},
-    current_dir: "C/Users"
+    current_dir: "C/Users",
+    Process : {},
 };
 
 export class File {
@@ -31,10 +32,23 @@ export class File {
     set write(str){this.content += str;}
     remove(){OS.ls()[this.name] = undefined;}
 }
+
 export class Path {
     constructor(path){
         this.absolute  = path;
     }
     set abspath(path){this.absolute = `${this.absolute}/${path}`;}
     get dirs() {return this.absolute.split("/");}
+    get toString() {return this.absolute;}
 }
+
+export class Process {
+    constructor(name,f){
+        this.name = name;
+        this.f = f;
+    }
+}
+
+
+
+
