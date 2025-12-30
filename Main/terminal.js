@@ -1,7 +1,9 @@
 import {OS,File,Path} from './os.js'
-const Console = {}
-OS.mapPath = function(path,callback){
-    const dirs = path.split("/");
+
+const Terminal = {}
+
+Terminal.mapPath = function(path,callback){
+    const dirs = new Path(path).dirs;
     let current = OS.Files;
     for (let dir of dirs) {
         if (!current[dir]) return false;
@@ -11,16 +13,16 @@ OS.mapPath = function(path,callback){
     return true;
 }
 
-OS.go_to_current_dir = function() {
-    const dirs = OS.current_dir.split("/");
-    let file = OS.Files;
+Terminal.go_to_current_dir = function() {
+    const dirs = new Path(OS.current_dir).dirs;
+    let files = OS.Files;
     for (let dir of dirs) {
-        file = file[dir];
+        files = files[dir];
     }
-    return [file, OS.current_dir];
+    return [files, OS.current_dir];
 };
 
-OS.cd = function(dir) {
+Terminal.cd = function(dir) {
     if (dir.startsWith("C/")) {
         OS.current_dir = dir;
         return OS.ls();
@@ -33,16 +35,18 @@ OS.cd = function(dir) {
     return current;
 };
 
-OS.ls = () => OS.go_to_current_dir()[0];
+Terminal.ls = () => OS.go_to_current_dir()[0];
 
-OS.newFile = function (name,content,dir=OS.current_dir){
+Terminal.mkfile = function (name,content,dir=OS.current_dir){
     OS.cd(dir);
     let file = new File(name, content, dir + "/" + name);
     return file;
 }
-OS.newDir = function (name,path=OS.current_dir){
+
+Terminal.mkdir = function (name,path=OS.current_dir){
     OS.mapPath(path, (current) => {
         current[name] = {};
     });
 }
+OS.Terminal = Terminal;
 
