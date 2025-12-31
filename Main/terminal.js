@@ -48,5 +48,19 @@ Terminal.mkdir = function (name,path=OS.current_dir){
         current[name] = {};
     });
 }
+Terminal.repeat(n,callback){
+    let cmd;
+    for(let i = 0; i<n;i++){
+        if(typeof callback==="string") {
+            cmd = callback.split(" "); 
+            Terminal[cmd[0]](cmd.slice(1,cmd.length));
+        }
+        else {
+            callback() 
+        }
+    }
+}
+
 OS.Terminal = Terminal;
+
 
