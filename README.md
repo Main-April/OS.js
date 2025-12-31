@@ -28,13 +28,14 @@ let name = "texte.txt";
 let content = "Ceci est un texte quelconque."
 let path = "C/Dossier_1";
 let file = new File(name,content,path)
-// OS.Files.C.Dossier_1 = File { name : "texte.txt", content : "eci est un texte quelconque", }
+// OS.Files.C.Dossier_1 = File { name : "texte.txt", content : "Ceci est un texte quelconque. ", }
 ```
 
-Vous pouvez également renommer et supprimer ces fichiers : 
+Vous pouvez également renommer, insérer du texte et supprimer ces fichiers : 
 
 ```javascript
 file.rename("data.txt");
+file.write("Ce texte est important. ");
 file.remove();
 ```
 
