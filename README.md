@@ -6,5 +6,7 @@ Utile pour tout projet visant à recréer une application quelconque de Windows.
 - Rien d'autre x)
 ## Importation
 ```html
-<script src="https://github.com/Main-April/OS.js/edit/main/Main/${file_name}"></script>
+<script src="https://github.com/Main-April/OS.js/blob/main/Main/${file_name}"></script>
 ```
+> [!CAUTION]
+> N'oubliez pas de désactiver le cors pour éviter toute erreur liée à l'importation des fichiers.
