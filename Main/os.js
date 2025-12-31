@@ -41,6 +41,14 @@ class Path {
     set abspath(path){this.absolute = `${this.absolute}/${path}`;}
     get dirs() {return this.absolute.split("/");}
     get toString() {return this.absolute;}
+    get location() {
+        let file = OS.Files;
+        let dirs = this.dirs;
+        for(dir of dirs){
+            file = file[dir];
+        }
+        return file;
+    }
 }
 
 class Process {
