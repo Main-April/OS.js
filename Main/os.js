@@ -59,15 +59,15 @@ class Process {
     }
     call(args,option){
         OS.Process.Stack.push(this.f);
-        OS.Process.Run(this.f,args,option.once?option.once:false);
+        OS.Process.Run(this,args,option.once?option.once:false);
     }
     get stop(){
-        clearInterval(OS.Process.Memory[this.name])
+        clearInterval(OS.Process.Memory[this.name]);
     }
 }
-OS.Process.Run = function (f,args,once) {
-    if(!once) {OS.Process.Memory[f.name] = setInterval(f(args),1); return;}
+OS.Process.Run = function (process,args,once) {
+    if(!once) {OS.Process.Memory[process.name] = setInterval(process.f(args),1); return;}
     f(args);
 }
-// Environ 75 lignes le 01/01/2026 à 00:01. Bonne année 2026 ! 
+// Environ 75 lignes ici le 01/01/2026 à 00:01. Bonne année 2026 ! 
 
