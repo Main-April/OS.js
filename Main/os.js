@@ -57,20 +57,17 @@ class Process {
         this.f = f;
         this.alloc = alloc;
     }
-    call(...args){
+    call(args,option){
         OS.Process.Stack.push(this.f);
-        OS.Process.Run(args);
+        OS.Process.Run(this.f,args,option.once?option.once:false);
     }
     get stop(){
-        OS.Process.Stack.indexOf
+        clearInterval(OS.Process.Memory[this.name])
     }
 }
-OS.Process.Run = function (...args) {
-    let f;
-    while(OS.Process.Stack.length>0){
-        f = OS.Process.Stack.shift();
-        f(...args);
-    }
+OS.Process.Run = function (f,args,once) {
+    if(!once) {OS.Process.Memory[f.name] = setInterval(f(args),1); return;}
+    f(args);
 }
 // Environ 75 lignes le 01/01/2026 à 00:01. Bonne année 2026 ! 
 
