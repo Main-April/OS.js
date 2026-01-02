@@ -2,8 +2,8 @@ const OS = {
     Name: "OS", // Can be changed by another name
     Files: {C: {Users: {ProgramFile:{}, Desktop : {},Documents : {},Downloads : {}}}},
     current_dir: "C/Users",
-    Process : {Stack:[], Memory : {},},
-    
+    Process : {Stack:[], Memory : {}},
+    Memory : {},
 };
 
 class File {
@@ -70,4 +70,18 @@ OS.Process.Run = function (process,args,once) {
     f(args);
 }
 // Environ 75 lignes ici le 01/01/2026 à 00:01. Bonne année 2026 ! 
-
+class Storage{
+    constructor(name,value){
+        this.name = name;
+        this.value = value;
+        this.maxLength = 2500000;
+        this.init();
+    }
+    init(){
+        OS.Memory[this.name] = this.value;
+        this.maxLength -= JSON.parse(OS.Memory).length;
+    }
+    set setPersistent(){
+        localStorage.setItem(OS.Name,JSON.parse(OS.Memory))
+    }
+}
