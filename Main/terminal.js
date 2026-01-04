@@ -48,7 +48,7 @@ Terminal.mkdir = function (name,path=OS.current_dir){
         current[name] = {};
     });
 }
-Terminal.repeat(n,callback){
+Terminal.repeat = function(n,callback){
     let cmd;
     for(let i = 0; i<n;i++){
         if(typeof callback==="string") {
@@ -62,6 +62,7 @@ Terminal.repeat(n,callback){
 }
 
 OS.Terminal = Terminal;
+
 
 
 
