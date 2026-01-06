@@ -85,3 +85,19 @@ class Storage{
         localStorage.setItem(OS.Name,JSON.parse(OS.Memory))
     }
 }
+// Used for the not static-values
+class Signal{
+    constructor(name,value,cond=null){
+        this.name = name;
+        this.value = value;
+        this.cond = cond;
+        this.init();
+    }
+    init(){globalThis[this.name]=this.value;}
+    change(value){
+        if(!this.cond) globalThis[this.name] = value;
+        else {
+            return setInterval(()=>{if(this.cond) globalThis[this.name]=this.value},0)
+        }
+    }
+}
