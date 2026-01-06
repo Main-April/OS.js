@@ -1,5 +1,5 @@
-let Kernel = {}
-Kernel.Mouse = {
-  x : EventMouse.clientX,
-  y : EventMouse.clientY,
+let Kernel = { key = "",}
+document.onkeypress = function(e){
+  Kernel.key = e.key;
+  return 
 }
